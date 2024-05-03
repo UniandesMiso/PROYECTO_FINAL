@@ -12,14 +12,5 @@ from src.engine.service_locator import ServiceLocator
 
 class WorldEntityExplosion(WorldEntityStrategy):
 
-    def create_entity(self, world: esper.World, **kwargs) -> int:
-        cuad_entity = world.create_entity()
-        img_surf: pygame.Surface = CSurface.from_surface(kwargs.get('image')) if kwargs.get('image') else None
-        world.add_component(cuad_entity, img_surf)
-        world.add_component(cuad_entity, CTransform(kwargs.get('position')))
-        world.add_component(cuad_entity, CVelocity(pygame.Vector2(0, 0)))
-        world.add_component(cuad_entity, CAnimation(kwargs.get('animations')))
-        world.add_component(cuad_entity, CExplosionTag())
-        if kwargs.get('sound'):
-            ServiceLocator.sounds_services.play(kwargs.get('sound'))
+    def create_entity(self, world: esper.World, cuad_entity: int, **kwargs) -> int:
         return cuad_entity

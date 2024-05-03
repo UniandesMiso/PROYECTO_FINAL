@@ -25,7 +25,8 @@ class GameEngine:
         self.pause_entity = -1
         self.ecs_world = esper.World()
 
-        self.window = self.strategy_load_cfg.cfg_executor('WINDOW_CFG')
+        self.window_cfg = self.strategy_load_cfg.cfg_executor('WINDOW_CFG')
+        self.player_cfg = self.strategy_load_cfg.cfg_executor('PLAYER_CFG')
 
     def run(self) -> None:
         self._create()
@@ -39,10 +40,15 @@ class GameEngine:
         self._clean()
 
     def _create(self):
-        ...
+        self.strategy_world_entity.world_entity_executor(
+            entity_type='PLAYER_ENTITY',
+            world=self.ecs_world,
+            player_cfg=self.player_cfg,
+            screen=self.window_cfg
+        )
 
     def _calculate_time(self):
-        self.clock.tick(self.window.get('framerate'))
+        self.clock.tick(self.window_cfg.get('framerate'))
         self.delta_time = self.clock.get_time() / 1000.0 if not self.on_pause else 0
         self.process_time += self.delta_time
 
@@ -56,7 +62,7 @@ class GameEngine:
         ...
 
     def _draw(self):
-        system_rendering(self.ecs_world, self.window.get('screen'))
+        system_rendering(self.ecs_world, self.window_cfg.get('screen'))
         pygame.display.flip()
 
     def _clean(self):

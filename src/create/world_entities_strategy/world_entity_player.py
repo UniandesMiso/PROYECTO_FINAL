@@ -9,19 +9,23 @@ from src.ecs.components.c_transform import CTransform
 from src.ecs.components.c_velocity import CVelocity
 from src.ecs.components.tags.c_player_tag import CPlayerTag
 from src.engine.service_locator import ServiceLocator
+from src.utils.window_localizer_util import window_position
 
 
 class WorldEntityPlayer(WorldEntityStrategy):
-
-    def create_entity(self, world: esper.World, **kwargs) -> int:
-        cuad_entity = world.create_entity()
-        img_surf: pygame.Surface = CSurface.from_surface(kwargs.get('image')) if kwargs.get('image') else None
+    def create_entity(self, world: esper.World, cuad_entity: int, **kwargs) -> int:
+        player_cfg: dict = kwargs.get("player_cfg")
+        screen_cfg: dict = kwargs.get("screen")
+        img_surf: CSurface = CSurface.from_surface(player_cfg.get('image'))
+        position = window_position(
+            screen=screen_cfg.get('screen_vector'),
+            fixed=player_cfg.get('start_position'),
+            surf=img_surf,
+            padding=player_cfg.get('padding')
+        )
         world.add_component(cuad_entity, img_surf)
-        world.add_component(cuad_entity, CTransform(kwargs.get('position')))
-        world.add_component(cuad_entity, CVelocity(kwargs.get('velocity')))
-        world.add_component(cuad_entity, CAnimation(kwargs.get('animations')))
-        world.add_component(cuad_entity, CPlayerState())
+        world.add_component(cuad_entity, CTransform(position))
+        world.add_component(cuad_entity, CVelocity(player_cfg.get('velocity')))
         world.add_component(cuad_entity, CPlayerTag())
-        if kwargs.get('sound'):
-            ServiceLocator.sounds_services.play(kwargs.get('sound'))
+
         return cuad_entity

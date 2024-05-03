@@ -7,9 +7,5 @@ from src.engine.service_locator import ServiceLocator
 
 class WorldEntityInputCommand(WorldEntityStrategy):
 
-    def create_entity(self, world: esper.World, **kwargs) -> int:
-        cuad_entity = world.create_entity()
-        world.add_component(cuad_entity, CInputCommand(name=kwargs.get('name'), key=kwargs.get('key')))
-        if kwargs.get('sound'):
-            ServiceLocator.sounds_services.play(kwargs.get('sound'))
+    def create_entity(self, world: esper.World, cuad_entity: int, **kwargs) -> int:
         return cuad_entity

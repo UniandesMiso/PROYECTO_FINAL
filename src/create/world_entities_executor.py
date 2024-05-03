@@ -1,3 +1,5 @@
+import pygame
+
 import esper
 from src.create.world_entities_strategy.world_entity_bullet import WorldEntityBullet
 from src.create.world_entities_strategy.world_entity_enemy import WorldEntityEnemy
@@ -7,6 +9,7 @@ from src.create.world_entities_strategy.world_entity_input import WorldEntityInp
 from src.create.world_entities_strategy.world_entity_none import WorldEntityNone
 from src.create.world_entities_strategy.world_entity_player import WorldEntityPlayer
 from src.create.world_entities_strategy.world_entity_strategy import WorldEntityStrategy
+from src.ecs.components.c_surface import CSurface
 
 
 class WorldEntitiesExecutor:
@@ -22,5 +25,7 @@ class WorldEntitiesExecutor:
         }
 
     def world_entity_executor(self, entity_type: str, world: esper.World, **kwargs) -> int:
+        cuad_entity = world.create_entity()
         world_entity: WorldEntityStrategy = self.strategy_dict.get(entity_type, WorldEntityNone())
-        return world_entity.create_entity(world, **kwargs)
+        world_entity.create_entity(world, cuad_entity, **kwargs)
+        return cuad_entity
