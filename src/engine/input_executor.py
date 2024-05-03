@@ -14,12 +14,7 @@ class InputExecutor:
             'PLAYER_LEFT_LETTER': InputPlayerMove(),
             'PLAYER_RIGHT': InputPlayerMove(),
             'PLAYER_RIGHT_LETTER': InputPlayerMove(),
-            'PLAYER_UP': InputPlayerMove(),
-            'PLAYER_UP_LETTER': InputPlayerMove(),
-            'PLAYER_DOWN': InputPlayerMove(),
-            'PLAYER_DOWN_LETTER': InputPlayerMove(),
             'PLAYER_FIRE': InputPlayerFire(),
-            'SPECIAL_POWER': InputPlayerFire(),
         }
 
     def input_executor(self, world: esper.World, c_input: CInputCommand, **kwargs) -> int:
