@@ -8,4 +8,5 @@ from src.engine.service_locator import ServiceLocator
 class WorldEntityInputCommand(WorldEntityStrategy):
 
     def create_entity(self, world: esper.World, cuad_entity: int, **kwargs) -> int:
+        world.add_component(cuad_entity, CInputCommand(name=kwargs.get('name'), key=kwargs.get('key')))
         return cuad_entity

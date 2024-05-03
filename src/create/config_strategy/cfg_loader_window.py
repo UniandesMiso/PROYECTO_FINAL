@@ -21,7 +21,6 @@ class CFGLoaderWindow(CFGLoaderStrategy):
             screen_bg = (json_color_r, json_color_g, json_color_b)
 
             game_screen = pygame.display.set_mode(screen_size, pygame.SCALED)
-            game_screen.fill(screen_bg)
             game_framerate = json_window.get('framerate', 60)
             screen_vector = pygame.Vector2(screen_size)
 

@@ -9,7 +9,6 @@ from src.create.world_entities_strategy.world_entity_input import WorldEntityInp
 from src.create.world_entities_strategy.world_entity_none import WorldEntityNone
 from src.create.world_entities_strategy.world_entity_player import WorldEntityPlayer
 from src.create.world_entities_strategy.world_entity_strategy import WorldEntityStrategy
-from src.ecs.components.c_surface import CSurface
 
 
 class WorldEntitiesExecutor:
