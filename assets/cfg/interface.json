@@ -1,18 +1,32 @@
 {
-    "title_text_color": {
-        "r": 255,
-        "g": 0,
-        "b": 0
+  "header_zone": {
+    "start_point": {
+      "x": 0,
+      "y": 0
     },
-    "normal_text_color": {
-        "r": 255,
-        "g": 255,
-        "b": 255
+    "size": {
+      "w": 256,
+      "h": 40
+    }
+  },
+  "enemies_zone": {
+    "start_point": {
+      "x": 0,
+      "y": 40
     },
-    "high_score_color": {
-        "r": 30,
-        "g": 144,
-        "b": 255
+    "size": {
+      "w": 256,
+      "h": 160
+    }
+  },
+  "player_zone": {
+    "start_point": {
+      "x": 0,
+      "y": 200
     },
-    "high_score_max_value": 1000
+    "size": {
+      "w": 256,
+      "h": 40
+    }
+  }
 }

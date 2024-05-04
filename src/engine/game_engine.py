@@ -8,6 +8,7 @@ from src.create.world_entities_executor import WorldEntitiesExecutor
 from src.ecs.components.c_input_command import CInputCommand
 from src.ecs.systems.s_animation import system_animation
 from src.ecs.systems.s_enemy_spawner import system_enemy_spawner
+from src.ecs.systems.s_enemy_state import system_enemy_state
 from src.ecs.systems.s_movement import system_movement
 from src.ecs.systems.s_player_input import system_player_input
 from src.ecs.systems.s_rendering import system_rendering
@@ -29,6 +30,8 @@ class GameEngine:
         self.ecs_world = esper.World()
 
         self.window_cfg = self.strategy_load_cfg.cfg_executor('WINDOW_CFG')
+        self.interface_cfg = self.strategy_load_cfg.cfg_executor('INTERFACE_CFG')
+        self.level_cfg = self.strategy_load_cfg.cfg_executor('LEVEL_CFG')
         self.player_cfg = self.strategy_load_cfg.cfg_executor('PLAYER_CFG')
         self.enemy_cfg = self.strategy_load_cfg.cfg_executor('ENEMY_CFG')
 
@@ -51,8 +54,9 @@ class GameEngine:
         self.player_entity = self.strategy_world_entity.world_entity_executor(
             entity_type='PLAYER_ENTITY',
             world=self.ecs_world,
-            player_cfg=self.player_cfg,
-            screen=self.window_cfg
+            entity_cfg=self.player_cfg,
+            screen_cfg=self.window_cfg,
+            zone_cfg=self.interface_cfg.get('player_zone')
         )
         self.strategy_world_entity.world_entity_executor(
             world=self.ecs_world, entity_type="INPUT_ENTITY",
@@ -84,9 +88,7 @@ class GameEngine:
 
     def _update(self):
         system_movement(self.ecs_world, self.delta_time)
-        system_enemy_spawner(self.ecs_world, self.enemy_cfg, self.window_cfg)
         system_players_screen_bounce(self.ecs_world, self.screen)
-        system_animation(self.ecs_world, self.delta_time)
 
     def _draw(self):
         self.screen.fill(self.window_cfg.get('bg'))

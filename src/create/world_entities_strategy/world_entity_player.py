@@ -13,16 +13,25 @@ from src.utils.window_localizer_util import window_position
 
 
 class WorldEntityPlayer(WorldEntityStrategy):
+
+
     def create_entity(self, world: esper.World, cuad_entity: int, **kwargs) -> int:
-        player_cfg: dict = kwargs.get("player_cfg")
-        screen_cfg: dict = kwargs.get("screen")
+        player_cfg: dict = kwargs.get("entity_cfg")
+        screen_cfg: dict = kwargs.get("screen_cfg")
+        zone_cfg: dict = kwargs.get("zone_cfg")
+
+        left = zone_cfg.get('start_point').get('x')
+        top = zone_cfg.get('start_point').get('y')
+        width = zone_cfg.get('size').get('w')
+        height = zone_cfg.get('size').get('h')
+        zone_rect = pygame.Rect(left, top, width, height)
 
         image = ServiceLocator.images_services.get(player_cfg.get('image'))
         img_surf: CSurface = CSurface.from_surface(image)
 
         position = window_position(
-            screen=screen_cfg.get('screen_vector'),
-            fixed=player_cfg.get('start_position'),
+            rect=zone_rect,
+            fixed=player_cfg.get('position'),
             surf=img_surf,
             padding=player_cfg.get('padding')
         )
