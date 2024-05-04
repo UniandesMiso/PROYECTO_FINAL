@@ -17,8 +17,14 @@ class WorldEntityEnemy(WorldEntityStrategy):
         enemy_cfg: dict = kwargs.get("enemy_cfg")
         screen_cfg: dict = kwargs.get("screen")
         image = ServiceLocator.images_services.get(enemy_cfg.get('image'))
+        img_size = image.get_size()
         img_surf: CSurface = CSurface.from_surface(image)
-        position = window_position(screen_cfg.get('screen_vector'), enemy_cfg.get('start_position'), img_surf)
+
+        size: pygame.Vector2 = pygame.Vector2(img_size[0] / enemy_cfg.get('animations').get('number_frames'),
+                                              img_size[1])
+        frame_surf: CSurface = CSurface.from_surface(pygame.Surface(size))
+
+        position = window_position(screen_cfg.get('screen_vector'), enemy_cfg.get('start_position'), frame_surf)
         world.add_component(cuad_entity, img_surf)
         world.add_component(cuad_entity, CTransform(position))
         world.add_component(cuad_entity, CAnimation(enemy_cfg.get('animations')))
