@@ -6,6 +6,7 @@ import esper
 from src.create.cfg_loader_executor import CFGLoaderExecutor
 from src.create.world_entities_executor import WorldEntitiesExecutor
 from src.ecs.components.c_input_command import CInputCommand
+from src.ecs.systems.s_enemy_spawner import system_enemy_spawner
 from src.ecs.systems.s_movement import system_movement
 from src.ecs.systems.s_player_input import system_player_input
 from src.ecs.systems.s_rendering import system_rendering
@@ -28,6 +29,7 @@ class GameEngine:
 
         self.window_cfg = self.strategy_load_cfg.cfg_executor('WINDOW_CFG')
         self.player_cfg = self.strategy_load_cfg.cfg_executor('PLAYER_CFG')
+        self.enemy_cfg = self.strategy_load_cfg.cfg_executor('ENEMY_CFG')
 
         self.pause_entity = -1
         self.player_entity = -1
@@ -81,6 +83,7 @@ class GameEngine:
 
     def _update(self):
         system_movement(self.ecs_world, self.delta_time)
+        #system_enemy_spawner(self.ecs_world, self.enemy_cfg, self.window_cfg)
         system_players_screen_bounce(self.ecs_world, self.screen)
 
     def _draw(self):

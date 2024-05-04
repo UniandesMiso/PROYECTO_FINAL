@@ -13,5 +13,5 @@ class CFGLoaderEnemy(CFGLoaderStrategy):
 
     def load_cfg(self, **kwargs):
         with open(ENEMIES_PATH, 'r') as enemies_loaded:
-            json_enemy = json.load(enemies_loaded)
-        return {}
+            return json.load(enemies_loaded)
+
