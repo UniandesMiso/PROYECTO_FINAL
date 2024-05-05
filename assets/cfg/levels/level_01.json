@@ -1,43 +1,23 @@
 {
-  "enemies": [
-    {
-      "type": "type_1",
-      "x": 10,
-      "y": 3,
-      "empties_boxes": []
-    },
-    {
-      "type": "type_2",
-      "x": 10,
-      "y": 1,
-      "empties_boxes": [
+  "enemies": {
+    "columns": 10,
+    "dist": [
+      {
+        "type": "type_4",
+        "quantity": 2
+      },
+      {
+        "type": "type_3",
+        "quantity": 6
+      },
         {
-          "y": 0,
-          "x": [0,9]
+          "type": "type_2",
+          "quantity": 8
+        },
+      {
+        "type": "type_1",
+        "quantity": 30
         }
-      ]
-    },
-    {
-      "type": "type_3",
-      "x": 10,
-      "y": 1,
-      "empties_boxes": [
-        {
-          "y": 0,
-          "x": [0,1,8,9]
-        }
-      ]
-    },
-    {
-      "type": "type_4",
-      "x": 10,
-      "y": 1,
-      "empties_boxes": [
-        {
-          "y": 0,
-          "x": [0,1,2,4,5,7,8,9]
-        }
-      ]
-    }
-  ]
+    ]
+  }
 }
