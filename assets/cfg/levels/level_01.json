@@ -1,23 +1,87 @@
 {
   "enemies": {
     "columns": 10,
+    "padding": 3,
     "dist": [
       {
         "type": "type_4",
-        "quantity": 2
+        "rows": 1,
+        "empty_spaces": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            0,
+            9
+          ]
+        ]
       },
       {
         "type": "type_3",
-        "quantity": 6
+        "rows": 1,
+        "empty_spaces": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            0,
+            9
+          ]
+        ]
       },
         {
           "type": "type_2",
-          "quantity": 8
+          "rows": 1,
+          "empty_spaces": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              9
+            ]
+          ]
         },
       {
         "type": "type_1",
-        "quantity": 30
-        }
+        "rows": 3,
+        "empty_spaces": []
+      }
     ]
   }
 }

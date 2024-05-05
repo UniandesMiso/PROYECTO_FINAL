@@ -16,7 +16,7 @@ def system_enemy_spawner(
     strategy_world_entity = WorldEntitiesExecutor()
 
     columns = level_cfg.get('columns')
-    enemy_zone_width = zone_rect.width / columns
+    enemy_zone_width = (zone_rect.width / columns) + level_cfg.get('padding')
 
     pos_y = zone_rect.y
 
@@ -26,12 +26,7 @@ def system_enemy_spawner(
             level_enemy_cfg = next(
                 filter(lambda cfg: cfg.get('type').__eq__(_type), level_dist)
             )
-            enemy_rows = math.ceil(
-                level_enemy_cfg.get('quantity') / columns
-            )
-            enemies_by_row = math.ceil(
-                level_enemy_cfg.get('quantity') / enemy_rows
-            )
+            enemy_rows = level_enemy_cfg.get('rows')
 
             image = ServiceLocator.images_services.get(_enemy.get('image'))
             img_surf: CSurface = CSurface.from_surface(image)
@@ -39,15 +34,17 @@ def system_enemy_spawner(
 
             for i in range(0, enemy_rows):
                 pos_x = zone_rect.x
-                for j in range(0, enemies_by_row):
-                    position = pygame.Vector2(pos_x, pos_y)
-                    strategy_world_entity.world_entity_executor(
-                        entity_type='ENEMY_ENTITY',
-                        world=world,
-                        position=position,
-                        entity_cfg=_enemy,
-                        img_surf=img_surf
-                    )
+                for j in range(0, columns):
+                    if [i, j] not in (level_enemy_cfg.get('empty_spaces')):
+                        position = pygame.Vector2(pos_x, pos_y)
+                        strategy_world_entity.world_entity_executor(
+                            entity_type='ENEMY_ENTITY',
+                            world=world,
+                            position=position,
+                            entity_cfg=_enemy,
+                            img_surf=img_surf
+                        )
+
                     pos_x += enemy_zone_width
                 pos_y += img_height
             _enemy.update(spawned=True)

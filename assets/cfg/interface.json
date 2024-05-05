@@ -6,9 +6,9 @@
     "height": 40
   },
   "enemies_zone": {
-    "left": 64,
+    "left": 34,
     "top": 40,
-    "width": 128,
+    "width": 158,
     "height": 160
   },
   "player_zone": {
