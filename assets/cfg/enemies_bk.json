@@ -1,0 +1,65 @@
+{
+  "type_1":{
+    "image": "assets/img/invaders_enemy_01.png",
+    "animations": {
+        "number_frames": 5,
+        "list": [
+            {
+                "name": "MOVE",
+                "start": 0,
+                "end": 0,
+                "framerate": 1
+            },
+            {
+                "name": "IDLE",
+                "start": 0,
+                "end": 0,
+                "framerate": 1
+            }
+        ]
+    }
+  },
+  "type_2":{
+    "image": "assets/img/invaders_enemy_02.png",
+    "animations": {
+        "number_frames": 5,
+        "list": [
+            {
+                "name": "MOVE",
+                "start": 0,
+                "end": 0,
+                "framerate": 1
+            },
+            {
+                "name": "IDLE",
+                "start": 0,
+                "end": 0,
+                "framerate": 1
+            }
+        ]
+    }
+  },
+  "type_3":{
+    "image": "assets/img/invaders_enemy_03.png",
+    "animations": {
+        "number_frames": 5,
+        "list": [
+            {
+                "name": "MOVE",
+                "start": 0,
+                "end": 0,
+                "framerate": 1
+            },
+            {
+                "name": "IDLE",
+                "start": 0,
+                "end": 0,
+                "framerate": 1
+            }
+        ]
+    }
+  },
+  "type_4":{
+    "image": "assets/img/invaders_enemy_03.png"
+  }
+}

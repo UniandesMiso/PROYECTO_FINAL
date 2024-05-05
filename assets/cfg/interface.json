@@ -1,32 +1,20 @@
 {
   "header_zone": {
-    "start_point": {
-      "x": 0,
-      "y": 0
-    },
-    "size": {
-      "w": 256,
-      "h": 40
-    }
+    "left": 0,
+    "top": 0,
+    "width": 256,
+    "height": 40
   },
   "enemies_zone": {
-    "start_point": {
-      "x": 0,
-      "y": 40
-    },
-    "size": {
-      "w": 256,
-      "h": 160
-    }
+    "left": 64,
+    "top": 40,
+    "width": 128,
+    "height": 160
   },
   "player_zone": {
-    "start_point": {
-      "x": 0,
-      "y": 200
-    },
-    "size": {
-      "w": 256,
-      "h": 40
-    }
+    "left": 0,
+    "top": 200,
+    "width": 256,
+    "height": 40
   }
 }
