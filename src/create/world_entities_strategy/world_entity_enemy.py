@@ -16,7 +16,7 @@ class WorldEntityEnemy(WorldEntityStrategy):
 
         world.add_component(cuad_entity, kwargs.get('img_surf'))
         world.add_component(cuad_entity, CTransform(position))
-        world.add_component(cuad_entity, CVelocity(pygame.Vector2(0, 0)))
+        world.add_component(cuad_entity, CVelocity(kwargs.get('velocity')))
         world.add_component(cuad_entity, CEnemyTag())
         if enemy_cfg.get('animations'):
             world.add_component(cuad_entity, CAnimation(enemy_cfg.get('animations')))

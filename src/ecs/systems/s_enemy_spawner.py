@@ -1,5 +1,3 @@
-import math
-
 import pygame
 
 import esper
@@ -17,12 +15,12 @@ def system_enemy_spawner(
 
     columns = level_cfg.get('columns')
     enemy_zone_width = (zone_rect.width / columns) + level_cfg.get('padding')
-
+    velocity = pygame.Vector2(level_cfg.get('block_vel'), 0)
+    level_dist = level_cfg.get('dist')
     pos_y = zone_rect.y
 
     for _type, _enemy in enemies_cfg.items():
         if not _enemy.get('spawned'):
-            level_dist = level_cfg.get('dist')
             level_enemy_cfg = next(
                 filter(lambda cfg: cfg.get('type').__eq__(_type), level_dist)
             )
@@ -42,7 +40,8 @@ def system_enemy_spawner(
                             world=world,
                             position=position,
                             entity_cfg=_enemy,
-                            img_surf=img_surf
+                            img_surf=img_surf,
+                            velocity=velocity
                         )
 
                     pos_x += enemy_zone_width
