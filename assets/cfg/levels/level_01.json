@@ -1,4 +1,19 @@
 {
+  "bullets": {
+    "basic": {
+      "max_at_time": 1,
+      "velocity": 100,
+      "color": {
+        "r": 255,
+        "g": 255,
+        "b": 255
+      },
+      "size": {
+        "w": 1,
+        "h": 3
+      }
+    }
+  },
   "enemies": {
     "columns": 10,
     "padding": 3,
