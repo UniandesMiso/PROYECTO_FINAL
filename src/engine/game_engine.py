@@ -86,7 +86,6 @@ class GameEngine:
                 self.is_running = False
 
     def _update(self):
-        system_enemy_screen_bounce(self.ecs_world, self.screen)
         system_enemy_spawner(
             self.ecs_world,
             self.enemy_cfg,
@@ -95,6 +94,7 @@ class GameEngine:
         )
         system_movement(self.ecs_world, self.delta_time)
         system_players_screen_bounce(self.ecs_world, self.screen)
+        system_enemy_screen_bounce(self.ecs_world, self.screen)
         system_animation(self.ecs_world, self.delta_time)
 
     def _draw(self):
