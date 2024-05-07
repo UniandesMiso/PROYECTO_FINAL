@@ -2,7 +2,7 @@
   "enemies": {
     "columns": 10,
     "padding": 3,
-    "block_vel": 90,
+    "block_vel": 10,
     "dist": [
       {
         "type": "type_4",
