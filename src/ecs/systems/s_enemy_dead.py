@@ -8,6 +8,7 @@ from src.ecs.components.tags.c_enemy_tag import CEnemyTag
 
 def system_enemy_dead(world: esper.World, explosion: dict):
     world_entity_strategy = WorldEntitiesExecutor()
+
     bullet_component = world.get_components(CTransform, CSurface, CBulletTag)
     enemies_component = world.get_components(CTransform, CSurface, CEnemyTag)
 
@@ -23,11 +24,10 @@ def system_enemy_dead(world: esper.World, explosion: dict):
             if enemy_rect.colliderect(bullet_rect):
                 world.delete_entity(enemy_entity)
                 world.delete_entity(entity_b)
-                """
-                world_entity_strategy.world_entity_executor(world=world,
-                                                            entity_type="EXPLOSION_ENTITY",
-                                                            position=c_e_t.pos,
-                                                            image=explosion.get('image'),
-                                                            animations=explosion.get('animations'),
-                                                            sound=explosion.get('sound'))
-                """
+
+                world_entity_strategy.world_entity_executor(
+                    world=world,
+                    entity_type="EXPLOSION_ENTITY",
+                    position=c_e_t.pos,
+                    explosion_cfg=explosion
+                )
