@@ -1,5 +1,3 @@
-import json
-
 import pygame
 
 import esper
@@ -10,6 +8,7 @@ from src.ecs.systems.s_animation import system_animation
 from src.ecs.systems.s_bullet_screen import system_bullet_screen
 from src.ecs.systems.s_enemy_dead import system_enemy_dead
 from src.ecs.systems.s_enemy_spawner import system_enemy_spawner
+from src.ecs.systems.s_explosion import system_explosion
 from src.ecs.systems.s_movement import system_movement
 from src.ecs.systems.s_player_input import system_player_input
 from src.ecs.systems.s_rendering import system_rendering
@@ -35,6 +34,7 @@ class GameEngine:
         self.level_cfg = self.strategy_load_cfg.cfg_executor('LEVEL_CFG')
         self.player_cfg = self.strategy_load_cfg.cfg_executor('PLAYER_CFG')
         self.enemy_cfg = self.strategy_load_cfg.cfg_executor('ENEMY_CFG')
+        self.explode_cfg = self.strategy_load_cfg.cfg_executor('EXPLOSION_CFG')
 
         self.pause_entity = -1
         self.player_entity = -1
@@ -102,7 +102,8 @@ class GameEngine:
         system_players_screen_bounce(self.ecs_world, self.screen)
         system_enemy_screen_bounce(self.ecs_world, self.screen)
         system_bullet_screen(self.ecs_world, self.screen)
-        system_enemy_dead(self.ecs_world, {})
+        system_enemy_dead(self.ecs_world, self.explode_cfg.get('enemies'))
+        system_explosion(self.ecs_world)
         system_animation(self.ecs_world, self.delta_time)
         self.ecs_world._clear_dead_entities()
 

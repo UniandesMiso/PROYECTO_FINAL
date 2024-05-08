@@ -1,4 +1,7 @@
 {
+  "explosions": {
+    "enemy_img": ""
+  },
   "bullets": {
     "basic": {
       "max_at_time": 1,
