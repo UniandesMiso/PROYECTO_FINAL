@@ -1,6 +1,6 @@
-import esper
 import pygame
 
+import esper
 from src.ecs.components.c_surface import CSurface
 from src.ecs.components.c_transform import CTransform
 from src.ecs.components.c_velocity import CVelocity
@@ -22,7 +22,7 @@ def system_enemy_screen_bounce(world: esper.World, screen: pygame.Surface):
         if cuad_rect.left < 0 or cuad_rect.right > screen_rect.width:
             c_v.vel.x *= -1
             cuad_rect.clamp_ip(screen_rect)
-            #c_t.pos.x = cuad_rect.x
+            break
 
 
 def system_players_screen_bounce(world: esper.World, screen: pygame.Surface):
