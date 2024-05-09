@@ -1,7 +1,4 @@
 {
-  "explosions": {
-    "enemy_img": ""
-  },
   "bullets": {
     "basic": {
       "max_at_time": 1,
@@ -19,8 +16,8 @@
   },
   "enemies": {
     "columns": 10,
-    "padding": 3,
-    "block_vel": 10,
+    "padding": 1,
+    "block_vel": 20,
     "dist": [
       {
         "type": "type_4",
