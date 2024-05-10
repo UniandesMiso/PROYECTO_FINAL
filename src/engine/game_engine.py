@@ -3,7 +3,7 @@ import pygame
 import esper
 from src.create.cfg_loader_executor import CFGLoaderExecutor
 from src.create.world_entities_executor import WorldEntitiesExecutor
-from src.ecs.components.c_input_command import CInputCommand
+from src.ecs.components.c_input_command import CInputCommand, CommandPhase
 from src.ecs.components.tags.c_font_tag import FontType
 from src.ecs.systems.s_animation import system_animation
 from src.ecs.systems.s_bullet_screen import system_bullet_screen
@@ -12,6 +12,7 @@ from src.ecs.systems.s_enemy_fire import system_enemy_fire
 from src.ecs.systems.s_enemy_spawner import system_enemy_spawner
 from src.ecs.systems.s_explosion import system_explosion
 from src.ecs.systems.s_movement import system_movement
+from src.ecs.systems.s_pause import system_pause
 from src.ecs.systems.s_player_dead import system_player_dead
 from src.ecs.systems.s_player_input import system_player_input
 from src.ecs.systems.s_player_spawn import system_player_spawn
@@ -29,7 +30,7 @@ class GameEngine:
         self.strategy_input = InputExecutor()
         self.clock = pygame.time.Clock()
         self.is_running = False
-        self.on_pause = True
+        self.on_pause = False
         self.delta_time = 0
         self.player_spawned = False
         self.ecs_world = esper.World()
@@ -45,6 +46,7 @@ class GameEngine:
         self.pause_entity = -1
         self.player_entity = -1
         self.appear_player_time = 0
+        self.appear_pause_time = 1
         self.last_score = 0
         self.screen = self.window_cfg.get('screen')
 
@@ -73,6 +75,10 @@ class GameEngine:
         self.strategy_world_entity.world_entity_executor(
             world=self.ecs_world, entity_type="INPUT_ENTITY",
             name="PLAYER_FIRE", key=pygame.K_z
+        )
+        self.strategy_world_entity.world_entity_executor(
+            world=self.ecs_world, entity_type="INPUT_ENTITY",
+            name="GAME_PAUSE", key=pygame.K_p
         )
 
         self.strategy_world_entity.world_entity_executor(
@@ -115,8 +121,9 @@ class GameEngine:
 
     def _calculate_time(self):
         self.clock.tick(self.window_cfg.get('framerate'))
-        self.delta_time = self.clock.get_time() / 1000.0
+        self.delta_time = self.clock.get_time() / 1000.0 if not self.on_pause else 0
         self.appear_player_time += self.delta_time
+        self.appear_pause_time += self.delta_time
 
     def _process_events(self):
         for event in pygame.event.get():
@@ -156,6 +163,7 @@ class GameEngine:
         )
         system_explosion(self.ecs_world)
         system_animation(self.ecs_world, self.delta_time)
+        #system_pause(self.ecs_world, self.font_cfg.get('paused_font'), self.window_cfg.get('screen_rect'), self.on_pause)
         self.ecs_world._clear_dead_entities()
 
     def _draw(self):
@@ -168,7 +176,20 @@ class GameEngine:
         pygame.quit()
 
     def _do_action(self, c_input: CInputCommand):
-        if self.ecs_world.entity_exists(self.player_entity):
+        if c_input.name == "GAME_PAUSE":
+            if c_input.phase == CommandPhase.START:
+                self.on_pause = not self.on_pause
+                if self.ecs_world.entity_exists(self.pause_entity):
+                    self.ecs_world.delete_entity(self.pause_entity)
+                else:
+                    self.pause_entity = self.strategy_world_entity.world_entity_executor(
+                        entity_type='FONT_ENTITY',
+                        world=self.ecs_world,
+                        font_cfg=self.font_cfg.get('paused_font'),
+                        screen_zone=self.window_cfg.get('screen_rect'),
+                        tag=FontType.PAUSE
+                    )
+        elif not self.on_pause:
             self.strategy_input.input_executor(
                 world=self.ecs_world,
                 c_input=c_input,

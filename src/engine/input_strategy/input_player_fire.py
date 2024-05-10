@@ -29,13 +29,14 @@ def basic_fire(c_input, world, bullet_cfg: dict, pos_x: int, pos_y: int, sound: 
 class InputPlayerFire(InputStrategy):
 
     def execute_action(self, world: esper.World, c_input: CInputCommand, **kwargs):
-        level_cfg: dict = kwargs.get('level_cfg')
-        player_cfg: dict = kwargs.get('player_cfg')
-        player_pos: CTransform = world.component_for_entity(kwargs.get('player_entity'), CTransform)
-        player_surface: CSurface = world.component_for_entity(kwargs.get('player_entity'), CSurface)
+        if world.entity_exists(kwargs.get('player_entity')):
+            level_cfg: dict = kwargs.get('level_cfg')
+            player_cfg: dict = kwargs.get('player_cfg')
+            player_pos: CTransform = world.component_for_entity(kwargs.get('player_entity'), CTransform)
+            player_surface: CSurface = world.component_for_entity(kwargs.get('player_entity'), CSurface)
 
-        bullets: dict = level_cfg.get('bullets')
-        pos_x = player_pos.pos.x + (player_surface.area.width / 2)
-        pos_y = player_pos.pos.y
+            bullets: dict = level_cfg.get('bullets')
+            pos_x = player_pos.pos.x + (player_surface.area.width / 2)
+            pos_y = player_pos.pos.y
 
-        basic_fire(c_input, world, bullets.get('from_player'), pos_x, pos_y, player_cfg.get('shoot_sound'))
+            basic_fire(c_input, world, bullets.get('from_player'), pos_x, pos_y, player_cfg.get('shoot_sound'))

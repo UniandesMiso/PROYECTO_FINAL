@@ -25,8 +25,9 @@ def move_right(c_input, player_cfg, velocity):
 class InputPlayerMove(InputStrategy):
 
     def execute_action(self, world: esper.World, c_input: CInputCommand, **kwargs):
-        player_cfg = kwargs.get('player_cfg')
-        player_velocity_component = world.component_for_entity(kwargs.get('player_entity'), CVelocity)
-        velocity = player_velocity_component.vel
-        move_left(c_input, player_cfg, velocity)
-        move_right(c_input, player_cfg, velocity)
+        if world.entity_exists(kwargs.get('player_entity')):
+            player_cfg = kwargs.get('player_cfg')
+            player_velocity_component = world.component_for_entity(kwargs.get('player_entity'), CVelocity)
+            velocity = player_velocity_component.vel
+            move_left(c_input, player_cfg, velocity)
+            move_right(c_input, player_cfg, velocity)
