@@ -2,5 +2,6 @@
     "image": "assets/img/invaders_char.png",
     "position": "MIDDLE",
     "padding": 5,
-    "input_velocity": 100
+    "input_velocity": 100,
+    "appear_at": 5
 }

@@ -1,3 +1,4 @@
 class CPlayerTag:
     def __init__(self) -> None:
-        pass
+        self.time = 0
+        self.spawned = False

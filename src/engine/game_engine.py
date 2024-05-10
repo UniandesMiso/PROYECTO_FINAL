@@ -12,6 +12,7 @@ from src.ecs.systems.s_enemy_spawner import system_enemy_spawner
 from src.ecs.systems.s_explosion import system_explosion
 from src.ecs.systems.s_movement import system_movement
 from src.ecs.systems.s_player_input import system_player_input
+from src.ecs.systems.s_player_spawn import system_player_spawn
 from src.ecs.systems.s_ready_font import system_ready_font
 from src.ecs.systems.s_rendering import system_rendering
 from src.ecs.systems.s_screen_bounce import system_players_screen_bounce, system_enemy_screen_bounce
@@ -54,32 +55,6 @@ class GameEngine:
         self._clean()
 
     def _create(self):
-        self.player_entity = self.strategy_world_entity.world_entity_executor(
-            entity_type='PLAYER_ENTITY',
-            world=self.ecs_world,
-            entity_cfg=self.player_cfg,
-            zone_cfg=self.interface_cfg.get('player_zone')
-        )
-        self.strategy_world_entity.world_entity_executor(
-            world=self.ecs_world, entity_type="INPUT_ENTITY",
-            name="PLAYER_LEFT_LETTER", key=pygame.K_a
-        )
-        self.strategy_world_entity.world_entity_executor(
-            world=self.ecs_world, entity_type="INPUT_ENTITY",
-            name="PLAYER_LEFT", key=pygame.K_LEFT
-        )
-        self.strategy_world_entity.world_entity_executor(
-            world=self.ecs_world, entity_type="INPUT_ENTITY",
-            name="PLAYER_RIGHT_LETTER", key=pygame.K_d
-        )
-        self.strategy_world_entity.world_entity_executor(
-            world=self.ecs_world, entity_type="INPUT_ENTITY",
-            name="PLAYER_RIGHT", key=pygame.K_RIGHT
-        )
-        self.strategy_world_entity.world_entity_executor(
-            world=self.ecs_world, entity_type="INPUT_ENTITY",
-            name="PLAYER_FIRE", key=pygame.K_z
-        )
 
         self.strategy_world_entity.world_entity_executor(
             entity_type='FONT_ENTITY',
@@ -130,7 +105,9 @@ class GameEngine:
                 self.is_running = False
 
     def _update(self):
-        system_ready_font(self.ecs_world, self.font_cfg.get('ready_font'), self.delta_time)
+        if system_ready_font(self.ecs_world, self.font_cfg.get('ready_font'), self.delta_time):
+            self.player_entity = system_player_spawn(self.ecs_world, self.player_cfg, self.interface_cfg)
+
         system_enemy_spawner(
             self.ecs_world,
             self.enemy_cfg,
@@ -157,6 +134,7 @@ class GameEngine:
         pygame.quit()
 
     def _do_action(self, c_input: CInputCommand):
+
         self.strategy_input.input_executor(
             world=self.ecs_world,
             c_input=c_input,
