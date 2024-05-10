@@ -18,5 +18,5 @@ class WorldEntityBullet(WorldEntityStrategy):
         world.add_component(cuad_entity, CSurface(size, color))
         world.add_component(cuad_entity, CTransform(position))
         world.add_component(cuad_entity, CVelocity(velocity))
-        world.add_component(cuad_entity, CBulletTag())
+        world.add_component(cuad_entity, kwargs.get('tag'))
         return cuad_entity

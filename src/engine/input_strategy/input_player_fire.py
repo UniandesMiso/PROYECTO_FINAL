@@ -5,16 +5,27 @@ from src.create.world_entities_executor import WorldEntitiesExecutor
 from src.ecs.components.c_input_command import CInputCommand, CommandPhase
 from src.ecs.components.c_surface import CSurface
 from src.ecs.components.c_transform import CTransform
-from src.ecs.components.tags.c_bullet_tag import CBulletTag
+from src.ecs.components.tags.c_bullet_tag import CBulletTag, TypeBullet
 from src.engine.input_strategy.input_strategy import InputStrategy
 from src.engine.service_locator import ServiceLocator
+
+
+def has_to_fire(world: esper.World, phase: CommandPhase, max_on_screen: int) -> bool:
+    components = world.get_components(CBulletTag)
+    c_b: CBulletTag
+    bullets = 0
+    for _, (c_b,) in components:
+        if TypeBullet.PLAYER == c_b._type:
+            bullets += 1
+
+    return phase == CommandPhase.START and bullets < max_on_screen
 
 
 def basic_fire(c_input, world, bullet_cfg: dict, pos_x: int, pos_y: int, sound: str):
     strategy_world_entity = WorldEntitiesExecutor()
     pos_x -= bullet_cfg.get('size').get('w') / 2
     if c_input.name == "PLAYER_FIRE":
-        if c_input.phase == CommandPhase.START and len(world.get_component(CBulletTag)) < bullet_cfg.get("max_at_time"):
+        if has_to_fire(world, c_input.phase, bullet_cfg.get("max_at_time")):
             size_cfg: dict = bullet_cfg.get('size')
             color_cfg: dict = bullet_cfg.get('color')
             velocity: int = int(bullet_cfg.get('velocity')) * -1
@@ -28,9 +39,9 @@ def basic_fire(c_input, world, bullet_cfg: dict, pos_x: int, pos_y: int, sound: 
                 color=color,
                 size=size,
                 position=position,
-                velocity=velocity
+                velocity=velocity,
+                tag=CBulletTag(TypeBullet.PLAYER)
             )
-
 
 
 class InputPlayerFire(InputStrategy):
@@ -45,4 +56,4 @@ class InputPlayerFire(InputStrategy):
         pos_x = player_pos.pos.x + (player_surface.area.width / 2)
         pos_y = player_pos.pos.y
 
-        basic_fire(c_input, world, bullets.get('basic'), pos_x, pos_y, player_cfg.get('shoot_sound'))
+        basic_fire(c_input, world, bullets.get('from_player'), pos_x, pos_y, player_cfg.get('shoot_sound'))

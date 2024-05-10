@@ -1,8 +1,21 @@
 {
   "bullets": {
-    "basic": {
+    "from_player": {
       "max_at_time": 1,
       "velocity": 200,
+      "color": {
+        "r": 255,
+        "g": 255,
+        "b": 255
+      },
+      "size": {
+        "w": 1,
+        "h": 3
+      }
+    },
+    "from_enemies": {
+      "max_at_time": 5,
+      "velocity": 90,
       "color": {
         "r": 255,
         "g": 255,
