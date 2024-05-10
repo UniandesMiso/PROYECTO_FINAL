@@ -56,7 +56,8 @@
       "b": 0
     },
     "size": 8,
-    "fixed": "BOTTOM_MIDDLE"
+    "fixed": "TOP_MIDDLE",
+    "max_view_time": 3
   },
   "paused_font": {
     "font": "assets/fnt/PressStart2P.ttf",

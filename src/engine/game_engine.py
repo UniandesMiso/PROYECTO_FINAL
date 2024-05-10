@@ -4,6 +4,7 @@ import esper
 from src.create.cfg_loader_executor import CFGLoaderExecutor
 from src.create.world_entities_executor import WorldEntitiesExecutor
 from src.ecs.components.c_input_command import CInputCommand
+from src.ecs.components.tags.c_font_tag import FontType
 from src.ecs.systems.s_animation import system_animation
 from src.ecs.systems.s_bullet_screen import system_bullet_screen
 from src.ecs.systems.s_enemy_dead import system_enemy_dead
@@ -11,6 +12,7 @@ from src.ecs.systems.s_enemy_spawner import system_enemy_spawner
 from src.ecs.systems.s_explosion import system_explosion
 from src.ecs.systems.s_movement import system_movement
 from src.ecs.systems.s_player_input import system_player_input
+from src.ecs.systems.s_ready_font import system_ready_font
 from src.ecs.systems.s_rendering import system_rendering
 from src.ecs.systems.s_screen_bounce import system_players_screen_bounce, system_enemy_screen_bounce
 from src.engine.input_executor import InputExecutor
@@ -26,7 +28,6 @@ class GameEngine:
         self.is_running = False
         self.on_pause = True
         self.delta_time = 0
-        self.process_time = 0
         self.ecs_world = esper.World()
 
         self.window_cfg = self.strategy_load_cfg.cfg_executor('WINDOW_CFG')
@@ -83,15 +84,25 @@ class GameEngine:
         self.strategy_world_entity.world_entity_executor(
             entity_type='FONT_ENTITY',
             world=self.ecs_world,
+            font_cfg=self.font_cfg.get('ready_font'),
+            screen_zone=self.interface_cfg.get('player_zone'),
+            tag=FontType.READY
+        )
+
+        self.strategy_world_entity.world_entity_executor(
+            entity_type='FONT_ENTITY',
+            world=self.ecs_world,
             font_cfg=self.font_cfg.get('up_font'),
-            screen_zone=self.interface_cfg.get('player_on')
+            screen_zone=self.interface_cfg.get('player_on'),
+            tag=FontType.PLAYER
         )
 
         self.strategy_world_entity.world_entity_executor(
             entity_type='FONT_ENTITY',
             world=self.ecs_world,
             font_cfg=self.font_cfg.get('current_score_font'),
-            screen_zone=self.interface_cfg.get('player_on')
+            screen_zone=self.interface_cfg.get('player_on'),
+            tag=FontType.SCORE
         )
 
         self.strategy_world_entity.world_entity_executor(
@@ -111,7 +122,6 @@ class GameEngine:
     def _calculate_time(self):
         self.clock.tick(self.window_cfg.get('framerate'))
         self.delta_time = self.clock.get_time() / 1000.0
-        self.process_time += self.delta_time
 
     def _process_events(self):
         for event in pygame.event.get():
@@ -120,7 +130,7 @@ class GameEngine:
                 self.is_running = False
 
     def _update(self):
-
+        system_ready_font(self.ecs_world, self.font_cfg.get('ready_font'), self.delta_time)
         system_enemy_spawner(
             self.ecs_world,
             self.enemy_cfg,

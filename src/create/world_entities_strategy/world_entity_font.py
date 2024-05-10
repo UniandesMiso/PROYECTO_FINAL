@@ -35,5 +35,5 @@ class WorldEntityFont(WorldEntityStrategy):
         font_surf, position = build_font(font_cfg, zone_cfg)
         world.add_component(cuad_entity, font_surf)
         world.add_component(cuad_entity, CTransform(position))
-        world.add_component(cuad_entity, CFontTag(FontType.STATIC))
+        world.add_component(cuad_entity, CFontTag(kwargs.get('tag', FontType.STATIC)))
         return cuad_entity
