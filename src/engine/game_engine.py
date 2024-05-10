@@ -8,6 +8,7 @@ from src.ecs.components.tags.c_font_tag import FontType
 from src.ecs.systems.s_animation import system_animation
 from src.ecs.systems.s_bullet_screen import system_bullet_screen
 from src.ecs.systems.s_enemy_dead import system_enemy_dead
+from src.ecs.systems.s_enemy_fire import system_enemy_fire
 from src.ecs.systems.s_enemy_spawner import system_enemy_spawner
 from src.ecs.systems.s_explosion import system_explosion
 from src.ecs.systems.s_movement import system_movement
@@ -125,6 +126,7 @@ class GameEngine:
             self.font_cfg.get('current_score_font'),
             self.interface_cfg.get('player_on')
         )
+        system_enemy_fire(self.ecs_world, self.level_cfg.get('bullets'))
         system_explosion(self.ecs_world)
         system_animation(self.ecs_world, self.delta_time)
         self.ecs_world._clear_dead_entities()

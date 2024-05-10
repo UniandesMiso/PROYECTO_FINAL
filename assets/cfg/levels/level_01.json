@@ -14,7 +14,7 @@
       }
     },
     "from_enemies": {
-      "max_at_time": 5,
+      "max_at_time": 3,
       "velocity": 90,
       "color": {
         "r": 255,
