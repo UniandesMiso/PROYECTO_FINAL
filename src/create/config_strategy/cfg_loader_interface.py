@@ -11,17 +11,24 @@ class CFGLoaderInterface(CFGLoaderStrategy):
 
     def load_cfg(self, **kwargs):
         with open(INTERFACE_PATH, "r") as fonts_loaded:
-            json_interface = json.load(fonts_loaded)
-            header_zone = json_interface.get('header_zone')
+            json_interface: dict = json.load(fonts_loaded)
+            player_on = json_interface.get('player_on')
+            hi_score = json_interface.get('hi_score')
             enemies_zone = json_interface.get('enemies_zone')
             player_zone = json_interface.get('player_zone')
 
             return dict(
-                header_zone=pygame.Rect(
-                    header_zone.get('left'),
-                    header_zone.get('top'),
-                    header_zone.get('width'),
-                    header_zone.get('height')
+                player_on=pygame.Rect(
+                    player_on.get('left'),
+                    player_on.get('top'),
+                    player_on.get('width'),
+                    player_on.get('height')
+                ),
+                hi_score=pygame.Rect(
+                    hi_score.get('left'),
+                    hi_score.get('top'),
+                    hi_score.get('width'),
+                    hi_score.get('height')
                 ),
                 enemies_zone=pygame.Rect(
                     enemies_zone.get('left'),

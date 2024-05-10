@@ -1,9 +1,15 @@
 {
-  "header_zone": {
-    "left": 0,
-    "top": 0,
-    "width": 256,
-    "height": 40
+  "player_on": {
+    "left": 30,
+    "top": 10,
+    "width": 40,
+    "height": 16
+  },
+  "hi_score": {
+    "left": 70,
+    "top": 10,
+    "width": 70,
+    "height": 16
   },
   "enemies_zone": {
     "left": 34,

@@ -1,4 +1,4 @@
-from src.create.config_strategy.cfg_loader_bullet import CFGLoaderBullet
+from src.create.config_strategy.cfg_loader_bullet import CFGLoaderFont
 from src.create.config_strategy.cfg_loader_enemy import CFGLoaderEnemy
 from src.create.config_strategy.cfg_loader_explosion import CFGLoaderExplosion
 from src.create.config_strategy.cfg_loader_interface import CFGLoaderInterface
@@ -16,10 +16,10 @@ class CFGLoaderExecutor:
             'LEVEL_CFG': CFGLoaderLevel(),
             'PLAYER_CFG': CFGLoaderPlayer(),
             'ENEMY_CFG': CFGLoaderEnemy(),
-            'BULLET_CFG': CFGLoaderBullet(),
+            'FONT_CFG': CFGLoaderFont(),
             'EXPLOSION_CFG': CFGLoaderExplosion(),
             'INTERFACE_CFG': CFGLoaderInterface(),
-            'WINDOW_CFG': CFGLoaderWindow()
+            'WINDOW_CFG': CFGLoaderWindow(),
         }
 
     def cfg_executor(self, cfg_type, **kwargs) -> dict:

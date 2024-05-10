@@ -7,19 +7,21 @@
       "g": 0,
       "b": 0
     },
-    "size": 18,
-    "fixed": "MIDDLE"
+    "size": 8,
+    "padding": 2,
+    "fixed": "TOP_LEFT"
   },
   "current_score_font": {
     "font": "assets/fnt/PressStart2P.ttf",
-    "text": "0",
+    "text": "00",
     "color": {
       "r": 255,
       "g": 255,
       "b": 255
     },
-    "size": 18,
-    "fixed": "BOTTOM_MIDDLE"
+    "size": 8,
+    "padding": 0,
+    "fixed": "BOTTOM_RIGHT"
   },
   "score_font": {
     "font": "assets/fnt/PressStart2P.ttf",
@@ -29,8 +31,9 @@
       "g": 0,
       "b": 0
     },
-    "size": 18,
-    "fixed": "MIDDLE"
+    "size": 8,
+    "padding": 10,
+    "fixed": "TOP_MIDDLE"
   },
   "hi_score_font": {
     "font": "assets/fnt/PressStart2P.ttf",
@@ -40,7 +43,8 @@
       "g": 144,
       "b": 255
     },
-    "size": 18,
+    "size": 8,
+    "padding": 2,
     "fixed": "BOTTOM_MIDDLE"
   },
   "ready_font": {
@@ -51,7 +55,7 @@
       "g": 0,
       "b": 0
     },
-    "size": 18,
+    "size": 8,
     "fixed": "BOTTOM_MIDDLE"
   },
   "paused_font": {
@@ -62,7 +66,7 @@
       "g": 0,
       "b": 0
     },
-    "size": 18,
+    "size": 8,
     "fixed": "BOTTOM_MIDDLE"
   },
   "game_over_font": {
@@ -73,7 +77,7 @@
       "g": 255,
       "b": 255
     },
-    "size": 18,
+    "size": 8,
     "fixed": "MIDDLE"
   }
 }

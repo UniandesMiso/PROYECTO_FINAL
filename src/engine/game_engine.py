@@ -35,6 +35,7 @@ class GameEngine:
         self.player_cfg = self.strategy_load_cfg.cfg_executor('PLAYER_CFG')
         self.enemy_cfg = self.strategy_load_cfg.cfg_executor('ENEMY_CFG')
         self.explode_cfg = self.strategy_load_cfg.cfg_executor('EXPLOSION_CFG')
+        self.font_cfg = self.strategy_load_cfg.cfg_executor('FONT_CFG')
 
         self.pause_entity = -1
         self.player_entity = -1
@@ -80,6 +81,35 @@ class GameEngine:
             name="PLAYER_FIRE", key=pygame.K_z
         )
 
+        self.strategy_world_entity.world_entity_executor(
+            entity_type='FONT_ENTITY',
+            world=self.ecs_world,
+            font_cfg=self.font_cfg.get('up_font'),
+            screen_zone=self.interface_cfg.get('player_on')
+        )
+
+        self.strategy_world_entity.world_entity_executor(
+            entity_type='FONT_ENTITY',
+            world=self.ecs_world,
+            font_cfg=self.font_cfg.get('current_score_font'),
+            screen_zone=self.interface_cfg.get('player_on')
+        )
+
+        self.strategy_world_entity.world_entity_executor(
+            entity_type='FONT_ENTITY',
+            world=self.ecs_world,
+            font_cfg=self.font_cfg.get('score_font'),
+            screen_zone=self.interface_cfg.get('hi_score')
+        )
+
+        self.strategy_world_entity.world_entity_executor(
+            entity_type='FONT_ENTITY',
+            world=self.ecs_world,
+            font_cfg=self.font_cfg.get('hi_score_font'),
+            screen_zone=self.interface_cfg.get('hi_score')
+        )
+
+
     def _calculate_time(self):
         self.clock.tick(self.window_cfg.get('framerate'))
         self.delta_time = self.clock.get_time() / 1000.0
@@ -124,3 +154,4 @@ class GameEngine:
             player_entity=self.player_entity,
             level_cfg=self.level_cfg
         )
+
