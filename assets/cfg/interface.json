@@ -1,19 +1,19 @@
 {
   "player_on": {
-    "left": 30,
-    "top": 10,
-    "width": 40,
-    "height": 16
+    "left": 0,
+    "top": 5,
+    "width": 55,
+    "height": 25
   },
   "hi_score": {
-    "left": 70,
-    "top": 10,
-    "width": 70,
-    "height": 16
+    "left": 110,
+    "top": 5,
+    "width": 110,
+    "height": 25
   },
   "enemies_zone": {
     "left": 34,
-    "top": 27,
+    "top": 32,
     "width": 158,
     "height": 160
   },

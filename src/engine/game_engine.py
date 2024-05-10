@@ -57,7 +57,6 @@ class GameEngine:
             entity_type='PLAYER_ENTITY',
             world=self.ecs_world,
             entity_cfg=self.player_cfg,
-            screen_cfg=self.window_cfg,
             zone_cfg=self.interface_cfg.get('player_zone')
         )
         self.strategy_world_entity.world_entity_executor(
@@ -109,7 +108,6 @@ class GameEngine:
             screen_zone=self.interface_cfg.get('hi_score')
         )
 
-
     def _calculate_time(self):
         self.clock.tick(self.window_cfg.get('framerate'))
         self.delta_time = self.clock.get_time() / 1000.0
@@ -122,12 +120,14 @@ class GameEngine:
                 self.is_running = False
 
     def _update(self):
+
         system_enemy_spawner(
             self.ecs_world,
             self.enemy_cfg,
             self.level_cfg.get('enemies'),
             self.interface_cfg.get('enemies_zone')
         )
+
         system_movement(self.ecs_world, self.delta_time)
         system_players_screen_bounce(self.ecs_world, self.screen)
         system_enemy_screen_bounce(self.ecs_world, self.screen)

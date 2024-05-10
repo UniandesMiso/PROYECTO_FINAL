@@ -1,6 +1,6 @@
 {
     "image": "assets/img/invaders_char.png",
-    "position": "BOTTOM_MIDDLE",
+    "position": "MIDDLE",
     "padding": 5,
     "input_velocity": 100
 }
