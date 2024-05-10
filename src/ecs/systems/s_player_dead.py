@@ -6,9 +6,8 @@ from src.ecs.components.tags.c_bullet_tag import CBulletTag, TypeBullet
 from src.ecs.components.tags.c_player_tag import CPlayerTag
 
 
-def system_player_dead(world: esper.World, explosion: dict):
+def system_player_dead(world: esper.World, explosion: dict) -> tuple:
     world_entity_strategy = WorldEntitiesExecutor()
-
     bullet_component = world.get_components(CTransform, CSurface, CBulletTag)
     player_component = world.get_components(CTransform, CSurface, CPlayerTag)
 
@@ -18,7 +17,8 @@ def system_player_dead(world: esper.World, explosion: dict):
     c_p_s: CSurface
     c_p_tg: CPlayerTag
     c_b_tg: CBulletTag
-
+    dead = False
+    last_score = 0
     for player_entity, (c_p_t, c_p_s, c_p_tg) in player_component:
         player_rect = CSurface.get_area_relative(c_p_s.area, c_p_t.pos)
         for entity_b, (c_b_t, c_b_s, c_b_tg) in bullet_component:
@@ -33,3 +33,6 @@ def system_player_dead(world: esper.World, explosion: dict):
                         position=c_p_t.pos,
                         explosion_cfg=explosion
                     )
+                    dead = True
+                    last_score = c_p_tg.current_score
+    return dead, last_score

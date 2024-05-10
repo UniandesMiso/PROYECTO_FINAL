@@ -4,5 +4,6 @@
     "padding": 5,
     "input_velocity": 100,
     "appear_at": 5,
-    "shoot_sound": "assets/snd/player_shoot.ogg"
+    "shoot_sound": "assets/snd/player_shoot.ogg",
+    "time_to_appear": 3
 }

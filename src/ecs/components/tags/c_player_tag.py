@@ -1,3 +1,3 @@
 class CPlayerTag:
-    def __init__(self) -> None:
-        self.current_score = 0
+    def __init__(self, current_score: int) -> None:
+        self.current_score = current_score

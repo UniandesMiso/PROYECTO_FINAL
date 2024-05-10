@@ -29,6 +29,6 @@ class WorldEntityPlayer(WorldEntityStrategy):
         world.add_component(cuad_entity, img_surf)
         world.add_component(cuad_entity, CTransform(position))
         world.add_component(cuad_entity, CVelocity(pygame.Vector2(0, 0)))
-        world.add_component(cuad_entity, CPlayerTag())
+        world.add_component(cuad_entity, CPlayerTag(kwargs.get('score', 0)))
 
         return cuad_entity
