@@ -1,7 +1,7 @@
 {
   "up_font": {
     "font": "assets/fnt/PressStart2P.ttf",
-    "text": " UP",
+    "text": "1UP",
     "color": {
       "r": 255,
       "g": 0,
@@ -57,6 +57,7 @@
     },
     "size": 8,
     "fixed": "TOP_MIDDLE",
+    "sound": "assets/snd/game_start.ogg",
     "max_view_time": 3
   },
   "paused_font": {

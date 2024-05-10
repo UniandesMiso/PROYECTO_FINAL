@@ -2,7 +2,7 @@
   "bullets": {
     "basic": {
       "max_at_time": 1,
-      "velocity": 100,
+      "velocity": 200,
       "color": {
         "r": 255,
         "g": 255,

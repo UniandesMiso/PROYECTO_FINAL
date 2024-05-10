@@ -36,4 +36,6 @@ class WorldEntityFont(WorldEntityStrategy):
         world.add_component(cuad_entity, font_surf)
         world.add_component(cuad_entity, CTransform(position))
         world.add_component(cuad_entity, CFontTag(kwargs.get('tag', FontType.STATIC)))
+        if font_cfg.get('sound'):
+            ServiceLocator.sounds_services.play(font_cfg.get('sound'))
         return cuad_entity
