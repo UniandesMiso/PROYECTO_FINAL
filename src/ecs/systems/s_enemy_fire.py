@@ -11,7 +11,7 @@ def has_to_fire(world: esper.World, max_on_screen: int) -> bool:
     c_b: CBulletTag
     bullets = 0
     for _, (c_b,) in components:
-        if TypeBullet.ENEMY == c_b._type:
+        if TypeBullet.ENEMY == c_b.bullet_type:
             bullets += 1
 
     return bullets < max_on_screen

@@ -13,7 +13,7 @@ def has_to_fire(world: esper.World, phase: CommandPhase, max_on_screen: int) -> 
     c_b: CBulletTag
     bullets = 0
     for _, (c_b,) in components:
-        if TypeBullet.PLAYER == c_b._type:
+        if TypeBullet.PLAYER == c_b.bullet_type:
             bullets += 1
 
     return phase == CommandPhase.START and bullets < max_on_screen

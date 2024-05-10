@@ -7,5 +7,6 @@ class TypeBullet(Enum):
 
 
 class CBulletTag:
-    def __init__(self, _type: TypeBullet) -> None:
-        self._type = _type
+    def __init__(self, bullet_type: TypeBullet) -> None:
+        self.bullet_type = bullet_type
+

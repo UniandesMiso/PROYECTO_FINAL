@@ -23,7 +23,7 @@ def system_enemy_dead(world: esper.World, explosion: dict, font_cfg: dict, inter
     for enemy_entity, (c_e_t, c_e_s, c_e_tg) in enemies_component:
         enemy_rect = CSurface.get_area_relative(c_e_s.area, c_e_t.pos)
         for entity_b, (c_b_t, c_b_s, c_b_tg) in bullet_component:
-            if TypeBullet.PLAYER == c_b_tg._type:
+            if TypeBullet.PLAYER == c_b_tg.bullet_type:
                 bullet_rect = CSurface.get_area_relative(c_b_s.area, c_b_t.pos)
                 if enemy_rect.colliderect(bullet_rect):
                     world.delete_entity(enemy_entity)
