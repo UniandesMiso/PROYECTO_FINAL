@@ -32,7 +32,6 @@ class GameEngine:
         self.on_pause = True
         self.delta_time = 0
         self.player_spawned = False
-        self.appear_player_time = 0
         self.ecs_world = esper.World()
 
         self.window_cfg = self.strategy_load_cfg.cfg_executor('WINDOW_CFG')
@@ -45,6 +44,8 @@ class GameEngine:
 
         self.pause_entity = -1
         self.player_entity = -1
+        self.appear_player_time = 0
+        self.last_score = 0
         self.screen = self.window_cfg.get('screen')
 
     def run(self) -> None:
@@ -125,13 +126,14 @@ class GameEngine:
 
     def _update(self):
         system_ready_font(self.ecs_world, self.font_cfg.get('ready_font'), self.delta_time)
-        dead, last_score = system_player_dead(self.ecs_world, self.explode_cfg.get('player'))
+        dead, score_on_dead = system_player_dead(self.ecs_world, self.explode_cfg.get('player'))
         if not self.player_spawned and self.appear_player_time > self.player_cfg.get('time_to_appear'):
-            self.player_entity = system_player_spawn(self.ecs_world, self.player_cfg, self.interface_cfg, last_score)
+            self.player_entity = system_player_spawn(self.ecs_world, self.player_cfg, self.interface_cfg, self.last_score)
             self.player_spawned = True
         if dead:
             self.player_spawned = False
             self.appear_player_time = 0
+            self.font_cfg['current_score_font']['text'] = self.last_score = score_on_dead
         if self.player_spawned:
             system_enemy_fire(self.ecs_world, self.level_cfg.get('bullets'))
 
