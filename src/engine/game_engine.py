@@ -12,6 +12,7 @@ from src.ecs.systems.s_enemy_fire import system_enemy_fire
 from src.ecs.systems.s_enemy_spawner import system_enemy_spawner
 from src.ecs.systems.s_explosion import system_explosion
 from src.ecs.systems.s_movement import system_movement
+from src.ecs.systems.s_player_dead import system_player_dead
 from src.ecs.systems.s_player_input import system_player_input
 from src.ecs.systems.s_player_spawn import system_player_spawn
 from src.ecs.systems.s_ready_font import system_ready_font
@@ -126,6 +127,7 @@ class GameEngine:
             self.font_cfg.get('current_score_font'),
             self.interface_cfg.get('player_on')
         )
+        system_player_dead(self.ecs_world, self.explode_cfg.get('player'))
         system_enemy_fire(self.ecs_world, self.level_cfg.get('bullets'))
         system_explosion(self.ecs_world)
         system_animation(self.ecs_world, self.delta_time)
@@ -141,12 +143,12 @@ class GameEngine:
         pygame.quit()
 
     def _do_action(self, c_input: CInputCommand):
-
-        self.strategy_input.input_executor(
-            world=self.ecs_world,
-            c_input=c_input,
-            player_cfg=self.player_cfg,
-            player_entity=self.player_entity,
-            level_cfg=self.level_cfg
-        )
+        if self.ecs_world.entity_exists(self.player_entity):
+            self.strategy_input.input_executor(
+                world=self.ecs_world,
+                c_input=c_input,
+                player_cfg=self.player_cfg,
+                player_entity=self.player_entity,
+                level_cfg=self.level_cfg
+            )
 

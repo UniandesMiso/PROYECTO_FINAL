@@ -1,3 +1,5 @@
+import random
+
 import esper
 from src.ecs.components.c_surface import CSurface
 from src.ecs.components.c_transform import CTransform
@@ -25,8 +27,15 @@ def system_enemy_fire(world: esper.World, bullets_cfg: dict):
     c_s: CSurface
     c_e: CEnemyTag
 
+    shooters = []
+    for i in range(0, enemy_bullet_cfg.get('max_at_time')):
+        shooters.append(random.randint(0, len(enemies_component)))
+
+    index = 0
     for _, (c_p, c_s, c_e) in enemies_component:
-        if has_to_fire(world, enemy_bullet_cfg.get('max_at_time')):
+        if has_to_fire(world, enemy_bullet_cfg.get('max_at_time')) and index in shooters:
             pos_x = c_p.pos.x + (c_s.area.width / 2) - enemy_bullet_cfg.get('size').get('w') / 2
             pos_y = c_p.pos.y + c_s.area.height
             system_bullet_spawn(world, enemy_bullet_cfg, 1, pos_x, pos_y, CBulletTag(TypeBullet.ENEMY))
+
+        index += 1
