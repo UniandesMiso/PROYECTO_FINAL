@@ -119,7 +119,12 @@ class GameEngine:
         system_players_screen_bounce(self.ecs_world, self.screen)
         system_enemy_screen_bounce(self.ecs_world, self.screen)
         system_bullet_screen(self.ecs_world, self.screen)
-        system_enemy_dead(self.ecs_world, self.explode_cfg.get('enemies'))
+        system_enemy_dead(
+            self.ecs_world,
+            self.explode_cfg.get('enemies'),
+            self.font_cfg.get('current_score_font'),
+            self.interface_cfg.get('player_on')
+        )
         system_explosion(self.ecs_world)
         system_animation(self.ecs_world, self.delta_time)
         self.ecs_world._clear_dead_entities()

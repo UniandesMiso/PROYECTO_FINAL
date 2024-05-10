@@ -17,7 +17,7 @@ class WorldEntityEnemy(WorldEntityStrategy):
         world.add_component(cuad_entity, kwargs.get('img_surf'))
         world.add_component(cuad_entity, CTransform(position))
         world.add_component(cuad_entity, CVelocity(kwargs.get('velocity')))
-        world.add_component(cuad_entity, CEnemyTag())
+        world.add_component(cuad_entity, CEnemyTag(enemy_cfg.get('dead_points', 0)))
         if enemy_cfg.get('animations'):
             world.add_component(cuad_entity, CAnimation(enemy_cfg.get('animations')))
         return cuad_entity

@@ -1,7 +1,8 @@
 {
   "type_4": {
     "image": "assets/img/invaders_enemy_04.png",
-    "spawned": false
+    "spawned": false,
+    "dead_points": 60
   },
   "type_3": {
     "image": "assets/img/invaders_enemy_03.png",
@@ -16,7 +17,8 @@
         }
       ]
     },
-    "spawned": false
+    "spawned": false,
+    "dead_points": 50
   },
   "type_2": {
     "image": "assets/img/invaders_enemy_02.png",
@@ -31,7 +33,8 @@
         }
       ]
     },
-    "spawned": false
+    "spawned": false,
+    "dead_points": 40
   },
   "type_1":{
     "image": "assets/img/invaders_enemy_01.png",
@@ -46,6 +49,7 @@
             }
         ]
     },
-    "spawned": false
+    "spawned": false,
+    "dead_points": 30
   }
 }
