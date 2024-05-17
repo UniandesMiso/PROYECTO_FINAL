@@ -123,7 +123,7 @@ class GameEngine:
 
     def _calculate_time(self):
         self.clock.tick(self.window_cfg.get('framerate'))
-        self.delta_time = self.clock.get_time() / 1000.0 if not self.on_pause else 0
+        self.delta_time = self.clock.get_time() / 1000.0
         self.appear_player_time += self.delta_time
         self.appear_pause_time += self.delta_time
 
@@ -154,7 +154,7 @@ class GameEngine:
             self.interface_cfg.get('enemies_zone')
         )
 
-        system_movement(self.ecs_world, self.delta_time)
+        system_movement(self.ecs_world, self.delta_time, self.on_pause)
         system_players_screen_bounce(self.ecs_world, self.screen)
         system_enemy_screen_bounce(self.ecs_world, self.screen)
         system_bullet_screen(self.ecs_world, self.screen)
