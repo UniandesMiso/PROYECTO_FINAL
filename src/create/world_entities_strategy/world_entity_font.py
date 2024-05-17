@@ -2,6 +2,7 @@ import pygame
 
 import esper
 from src.create.world_entities_strategy.world_entity_strategy import WorldEntityStrategy
+from src.ecs.components.c_blink import CBlink
 from src.ecs.components.c_surface import CSurface
 from src.ecs.components.c_transform import CTransform
 from src.ecs.components.tags.c_font_tag import CFontTag, FontType
@@ -36,6 +37,9 @@ class WorldEntityFont(WorldEntityStrategy):
         world.add_component(cuad_entity, font_surf)
         world.add_component(cuad_entity, CTransform(position))
         world.add_component(cuad_entity, CFontTag(kwargs.get('tag', FontType.STATIC)))
+
+        if font_cfg.get('blink_rate'):
+            world.add_component(cuad_entity, CBlink(font_cfg.get('blink_rate')))
         if font_cfg.get('sound'):
             ServiceLocator.sounds_services.play(font_cfg.get('sound'))
         return cuad_entity
