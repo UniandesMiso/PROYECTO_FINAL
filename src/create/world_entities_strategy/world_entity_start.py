@@ -2,6 +2,7 @@ import pygame
 
 import esper
 from src.create.world_entities_strategy.world_entity_strategy import WorldEntityStrategy
+from src.ecs.components.c_blink import CBlink
 from src.ecs.components.c_surface import CSurface
 from src.ecs.components.c_transform import CTransform
 from src.ecs.components.c_velocity import CVelocity
@@ -18,6 +19,7 @@ class WorldEntityStart(WorldEntityStrategy):
         world.add_component(cuad_entity, CSurface(size, color))
         world.add_component(cuad_entity, velocity)
         world.add_component(cuad_entity, CTransform(position))
+        world.add_component(cuad_entity, CBlink(kwargs.get('blink')))
         world.add_component(cuad_entity, CStartTag())
 
         return cuad_entity
