@@ -1,0 +1,3 @@
+class CStartTag:
+    def __init__(self) -> None:
+        ...
