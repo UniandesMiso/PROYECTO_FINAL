@@ -166,7 +166,7 @@ class GameEngine:
         )
         system_explosion(self.ecs_world)
         system_blink(self.ecs_world)
-        system_animation(self.ecs_world, self.delta_time)
+        system_animation(self.ecs_world, self.delta_time, self.on_pause)
         self.ecs_world._clear_dead_entities()
 
     def _draw(self):
