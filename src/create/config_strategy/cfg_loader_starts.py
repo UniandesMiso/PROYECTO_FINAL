@@ -1,0 +1,16 @@
+import json
+
+import pygame
+
+from src.create.config_strategy.cfg_loader_strategy import CFGLoaderStrategy
+
+from src.engine.service_locator import ServiceLocator
+
+PLAYER_PATH = 'assets/cfg/starfield.json'
+
+
+class CFGLoaderStarts(CFGLoaderStrategy):
+
+    def load_cfg(self, **kwargs) -> dict:
+        with open(PLAYER_PATH, 'r') as players_loaded:
+            return json.load(players_loaded)
