@@ -192,7 +192,7 @@ class GameEngine:
                         screen_zone=self.window_cfg.get('screen_rect'),
                         tag=FontType.PAUSE
                     )
-        elif not self.on_pause:
+        elif not self.on_pause and self.ecs_world.entity_exists(self.player_entity):
             self.strategy_input.input_executor(
                 world=self.ecs_world,
                 c_input=c_input,

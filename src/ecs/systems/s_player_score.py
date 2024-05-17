@@ -11,17 +11,18 @@ def system_player_score(world: esper.World, font_cfg: dict, interface_cfg: dict,
     c_p_t: CPlayerTag
     c_f_t: CFontTag
 
-    for _, (c_p_t,) in player_components:
+    for entity, (c_p_t,) in player_components:
         c_p_t.current_score += points
         font_cfg['text'] = str(c_p_t.current_score)
 
-    for entity, (c_f_t,) in font_components:
-        if FontType.SCORE == c_f_t.font_type:
-            world.delete_entity(entity)
-            strategy_world_entity.world_entity_executor(
-                entity_type='FONT_ENTITY',
-                world=world,
-                font_cfg=font_cfg,
-                screen_zone=interface_cfg,
-                tag=FontType.SCORE
-            )
+    if len(player_components) > 0:
+        for entity, (c_f_t,) in font_components:
+            if FontType.SCORE == c_f_t.font_type:
+                world.delete_entity(entity)
+                strategy_world_entity.world_entity_executor(
+                    entity_type='FONT_ENTITY',
+                    world=world,
+                    font_cfg=font_cfg,
+                    screen_zone=interface_cfg,
+                    tag=FontType.SCORE
+                )
