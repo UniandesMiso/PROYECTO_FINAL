@@ -94,6 +94,7 @@ class PlayScene(SceneStrategy):
             self.player_spawned = False
             self.appear_player_time = 0
             self.font_cfg['current_score_font']['text'] = self.last_score = score_on_dead
+            self.switch_scene('')
         if self.player_spawned:
             system_enemy_fire(self.ecs_world, self.level_cfg.get('bullets'))
 
