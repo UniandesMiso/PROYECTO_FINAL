@@ -62,7 +62,7 @@ class GameEngine:
     def _handle_switch_scene(self):
         if self._scene_name_to_switch is not None:
             self._current_scene.clean()
-            self._current_scene = self.scene_executor.scene_executor(self, self._scene_name_to_switch, self.window_cfg)
+            self._current_scene = self.scene_executor.scene_executor(self._scene_name_to_switch)
             self._current_scene.do_create()
             self._scene_name_to_switch = None
 
