@@ -5,6 +5,8 @@ from src.create.world_entities_strategy.world_entity_bullet import WorldEntityBu
 from src.create.world_entities_strategy.world_entity_enemy import WorldEntityEnemy
 from src.create.world_entities_strategy.world_entity_explosion import WorldEntityExplosion
 from src.create.world_entities_strategy.world_entity_font import WorldEntityFont
+from src.create.world_entities_strategy.world_entity_menu import WorldEntityMenu
+from src.create.world_entities_strategy.world_entity_banner import WorldEntityBanner
 from src.create.world_entities_strategy.world_entity_input import WorldEntityInputCommand
 from src.create.world_entities_strategy.world_entity_none import WorldEntityNone
 from src.create.world_entities_strategy.world_entity_player import WorldEntityPlayer
@@ -22,6 +24,8 @@ class WorldEntitiesExecutor:
             'INPUT_ENTITY': WorldEntityInputCommand(),
             'ENEMY_ENTITY': WorldEntityEnemy(),
             'FONT_ENTITY': WorldEntityFont(),
+            'MENU_ENTITY': WorldEntityMenu(),
+            'BANNER_ENTITY': WorldEntityBanner(),
             'START_ENTITY': WorldEntityStart()
         }
 

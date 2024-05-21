@@ -1,6 +1,7 @@
 from src.create.config_strategy.cfg_loader_bullet import CFGLoaderFont
 from src.create.config_strategy.cfg_loader_enemy import CFGLoaderEnemy
 from src.create.config_strategy.cfg_loader_explosion import CFGLoaderExplosion
+from src.create.config_strategy.cfg_loader_menu import CFGLoaderMenu
 from src.create.config_strategy.cfg_loader_interface import CFGLoaderInterface
 from src.create.config_strategy.cfg_loader_level import CFGLoaderLevel
 from src.create.config_strategy.cfg_loader_none import CFGLoaderNone
@@ -21,6 +22,7 @@ class CFGLoaderExecutor:
             'EXPLOSION_CFG': CFGLoaderExplosion(),
             'INTERFACE_CFG': CFGLoaderInterface(),
             'WINDOW_CFG': CFGLoaderWindow(),
+            'MENU_CFG': CFGLoaderMenu(),
             'STARTS_CFG': CFGLoaderStarts()
         }
 
