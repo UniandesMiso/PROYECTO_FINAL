@@ -31,7 +31,8 @@ def system_player_dead(world: esper.World, explosion: dict) -> tuple:
                         world=world,
                         entity_type="EXPLOSION_ENTITY",
                         position=c_p_t.pos,
-                        explosion_cfg=explosion
+                        explosion_cfg=explosion,
+                        from_player=True
                     )
                     dead = True
                     last_score = c_p_tg.current_score

@@ -22,7 +22,7 @@ class WorldEntityExplosion(WorldEntityStrategy):
         world.add_component(cuad_entity, CTransform(kwargs.get('position')))
         world.add_component(cuad_entity, CVelocity(pygame.Vector2(0, 0)))
         world.add_component(cuad_entity, CAnimation(explosion_cfg.get('animations')))
-        world.add_component(cuad_entity, CExplosionTag())
+        world.add_component(cuad_entity, CExplosionTag(kwargs.get('from_player', False)))
         ServiceLocator.sounds_services.play(explosion_cfg.get('sound'))
 
         return cuad_entity

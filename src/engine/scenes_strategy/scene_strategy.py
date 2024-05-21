@@ -34,6 +34,7 @@ class SceneStrategy(ABC):
         self.appear_player_time = 0
         self.appear_pause_time = 1
         self.last_score = 0
+        self.game_over = False
 
         self.screen = self.window_cfg.get('screen')
 
