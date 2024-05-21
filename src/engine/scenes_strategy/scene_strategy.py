@@ -25,6 +25,7 @@ class SceneStrategy(ABC):
         self.player_cfg = self.strategy_load_cfg.cfg_executor('PLAYER_CFG')
         self.enemy_cfg = self.strategy_load_cfg.cfg_executor('ENEMY_CFG')
         self.explode_cfg = self.strategy_load_cfg.cfg_executor('EXPLOSION_CFG')
+        self.menu_cfg = self.strategy_load_cfg.cfg_executor('MENU_CFG')
         self.font_cfg = self.strategy_load_cfg.cfg_executor('FONT_CFG')
         self.starts_cfg = self.strategy_load_cfg.cfg_executor('STARTS_CFG')
         self.pause_entity = -1
