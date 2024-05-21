@@ -31,13 +31,20 @@ class PlayScene(SceneStrategy):
             world=self.ecs_world, entity_type="INPUT_ENTITY",
             name="PLAYER_RIGHT", key=pygame.K_RIGHT
         )
+
         self.strategy_world_entity.world_entity_executor(
             world=self.ecs_world, entity_type="INPUT_ENTITY",
             name="PLAYER_FIRE", key=pygame.K_z
         )
+
         self.strategy_world_entity.world_entity_executor(
             world=self.ecs_world, entity_type="INPUT_ENTITY",
             name="GAME_PAUSE", key=pygame.K_p
+        )
+
+        self.strategy_world_entity.world_entity_executor(
+            world=self.ecs_world, entity_type="INPUT_ENTITY",
+            name="GAME_OVER", key=pygame.K_z
         )
 
         self.strategy_world_entity.world_entity_executor(
@@ -86,16 +93,14 @@ class PlayScene(SceneStrategy):
         system_start_positions(self.ecs_world, self.window_cfg.get('screen_vector'))
         system_ready_font(self.ecs_world, self.font_cfg.get('ready_font'), delta_time)
         dead, score_on_dead = system_player_dead(self.ecs_world, self.explode_cfg.get('player'))
-        if not self.player_spawned and self.appear_player_time > self.player_cfg.get('time_to_appear'):
+        if not self.game_over and not self.player_spawned and self.appear_player_time > self.player_cfg.get('time_to_appear'):
             self.player_entity = system_player_spawn(self.ecs_world, self.player_cfg, self.interface_cfg,
                                                      self.last_score)
             self.player_spawned = True
         if dead:
-            self.player_spawned = False
-            self.appear_player_time = 0
+            self.game_over = True
             self.font_cfg['current_score_font']['text'] = self.last_score = score_on_dead
-            self.switch_scene('')
-        if self.player_spawned:
+        if not self.game_over and self.player_spawned:
             system_enemy_fire(self.ecs_world, self.level_cfg.get('bullets'))
 
         system_enemy_spawner(
@@ -115,12 +120,19 @@ class PlayScene(SceneStrategy):
             self.font_cfg.get('current_score_font'),
             self.interface_cfg.get('player_on')
         )
-        system_explosion(self.ecs_world)
+        system_explosion(self.ecs_world, self.font_cfg.get('game_over_font'), self.interface_cfg.get('game_over_zone'))
         system_blink(self.ecs_world)
         system_animation(self.ecs_world, delta_time, self.on_pause)
 
     def do_action(self, c_input: CInputCommand):
-        if c_input.name == "GAME_PAUSE":
+        if c_input.name == "GAME_OVER":
+            if c_input.phase == CommandPhase.START:
+                if not self.game_over: return
+                self.game_over = False
+                self.player_spawned = False
+                self.appear_player_time = 0
+                self.switch_scene('MENU')
+        elif c_input.name == "GAME_PAUSE":
             if c_input.phase == CommandPhase.START:
                 self.on_pause = not self.on_pause
                 if self.ecs_world.entity_exists(self.pause_entity):

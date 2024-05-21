@@ -18,8 +18,8 @@ def system_create_starts(world: esper.World, starts_cfg: dict, screen_vector: py
 
     for i in range(0, starts_cfg.get('number_of_stars', 0)):
         color: dict = random.choice(colors)
-        position_x: int = random.randint(1, screen_width)
-        position_y: int = random.randint(0, screen_height)
+        position_x: int = random.randint(1, int(screen_width))
+        position_y: int = random.randint(0, int(screen_height))
         strategy_world_entity.world_entity_executor(
             world=world,
             entity_type="START_ENTITY",
