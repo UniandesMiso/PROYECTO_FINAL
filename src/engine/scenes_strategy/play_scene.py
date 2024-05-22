@@ -22,6 +22,7 @@ class PlayScene(SceneStrategy):
 
     def do_create(self):
         system_create_starts(self.ecs_world, self.starts_cfg, self.window_cfg.get('screen_vector'))
+
         self.strategy_world_entity.world_entity_executor(
             world=self.ecs_world, entity_type="INPUT_ENTITY",
             name="PLAYER_LEFT", key=pygame.K_LEFT
@@ -99,7 +100,6 @@ class PlayScene(SceneStrategy):
             self.player_spawned = True
         if dead:
             self.game_over = True
-            self.font_cfg['current_score_font']['text'] = self.last_score = score_on_dead
         if not self.game_over and self.player_spawned:
             system_enemy_fire(self.ecs_world, self.level_cfg.get('bullets'))
 
@@ -155,4 +155,4 @@ class PlayScene(SceneStrategy):
             )
 
     def do_clean(self):
-        pass
+        for _, enemy in self.enemy_cfg.items(): enemy.update(spawned=False)
