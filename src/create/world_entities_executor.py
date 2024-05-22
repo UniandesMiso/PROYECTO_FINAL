@@ -10,6 +10,7 @@ from src.create.world_entities_strategy.world_entity_none import WorldEntityNone
 from src.create.world_entities_strategy.world_entity_player import WorldEntityPlayer
 from src.create.world_entities_strategy.world_entity_start import WorldEntityStart
 from src.create.world_entities_strategy.world_entity_strategy import WorldEntityStrategy
+from src.create.world_entities_strategy.world_entity_level import WorldEntityLevel
 
 
 class WorldEntitiesExecutor:
@@ -22,7 +23,8 @@ class WorldEntitiesExecutor:
             'INPUT_ENTITY': WorldEntityInputCommand(),
             'ENEMY_ENTITY': WorldEntityEnemy(),
             'FONT_ENTITY': WorldEntityFont(),
-            'START_ENTITY': WorldEntityStart()
+            'START_ENTITY': WorldEntityStart(),
+            'LEVEL_ENTITY': WorldEntityLevel()
         }
 
     def world_entity_executor(self, entity_type: str, world: esper.World, **kwargs) -> int:

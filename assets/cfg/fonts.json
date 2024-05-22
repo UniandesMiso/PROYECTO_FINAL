@@ -82,5 +82,16 @@
     },
     "size": 8,
     "fixed": "MIDDLE"
+  },
+  "level_font": {
+    "image": "assets/img/invaders_level_flag.png",
+    "font": "assets/fnt/PressStart2P.ttf",
+    "color": {
+      "r": 255,
+      "g": 255,
+      "b": 255
+    },
+    "size": 8,
+    "fixed": "BOTTOM_MIDDLE"
   }
 }

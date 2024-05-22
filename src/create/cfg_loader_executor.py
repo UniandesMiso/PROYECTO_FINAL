@@ -1,4 +1,4 @@
-from src.create.config_strategy.cfg_loader_bullet import CFGLoaderFont
+from src.create.config_strategy.cfg_loader_font import CFGLoaderFont
 from src.create.config_strategy.cfg_loader_enemy import CFGLoaderEnemy
 from src.create.config_strategy.cfg_loader_explosion import CFGLoaderExplosion
 from src.create.config_strategy.cfg_loader_interface import CFGLoaderInterface

@@ -28,7 +28,7 @@
     }
   },
   "enemies": {
-    "columns": 10,
+    "columns": 2,
     "padding": 1,
     "block_vel": 20,
     "dist": [
@@ -37,14 +37,7 @@
         "rows": 1,
         "velocity": 10,
         "empty_spaces": [
-          [0, 0],
-          [0, 1],
-          [0, 2],
-          [0, 4],
-          [0, 5],
-          [0, 7],
-          [0, 8],
-          [0, 9]
+          [0, 0]
         ]
       },
       {
@@ -52,10 +45,7 @@
         "rows": 1,
         "velocity": 10,
         "empty_spaces": [
-          [0, 0],
-          [0, 1],
-          [0, 8],
-          [0, 9]
+          [0, 0]
         ]
       },
         {
@@ -63,13 +53,12 @@
           "rows": 1,
           "velocity": 10,
           "empty_spaces": [
-            [0, 0],
-            [0, 9]
+            [0, 0]
           ]
         },
       {
         "type": "type_1",
-        "rows": 3,
+        "rows": 1,
         "velocity": 10,
         "empty_spaces": []
       }

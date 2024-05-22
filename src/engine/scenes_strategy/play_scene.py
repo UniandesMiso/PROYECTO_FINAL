@@ -9,6 +9,7 @@ from src.ecs.systems.s_enemy_dead import system_enemy_dead
 from src.ecs.systems.s_enemy_fire import system_enemy_fire
 from src.ecs.systems.s_enemy_spawner import system_enemy_spawner
 from src.ecs.systems.s_explosion import system_explosion
+from src.ecs.systems.s_level_up import system_level_up
 from src.ecs.systems.s_movement import system_movement
 from src.ecs.systems.s_player_dead import system_player_dead
 from src.ecs.systems.s_player_spawn import system_player_spawn
@@ -38,6 +39,13 @@ class PlayScene(SceneStrategy):
         self.strategy_world_entity.world_entity_executor(
             world=self.ecs_world, entity_type="INPUT_ENTITY",
             name="GAME_PAUSE", key=pygame.K_p
+        )
+
+        self.strategy_world_entity.world_entity_executor(
+            world=self.ecs_world, entity_type='LEVEL_ENTITY',
+            current_level=1,
+            screen_zone=self.interface_cfg.get('level_zone'),
+            font_cfg=self.font_cfg.get('level_font'),
         )
 
         self.strategy_world_entity.world_entity_executor(
@@ -117,6 +125,7 @@ class PlayScene(SceneStrategy):
         )
         system_explosion(self.ecs_world)
         system_blink(self.ecs_world)
+        system_level_up(self.ecs_world, self.font_cfg, 1)
         system_animation(self.ecs_world, delta_time, self.on_pause)
 
     def do_action(self, c_input: CInputCommand):

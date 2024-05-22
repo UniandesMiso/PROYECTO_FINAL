@@ -16,6 +16,7 @@ class CFGLoaderInterface(CFGLoaderStrategy):
             hi_score = json_interface.get('hi_score')
             enemies_zone = json_interface.get('enemies_zone')
             player_zone = json_interface.get('player_zone')
+            level_zone = json_interface.get('level_zone')
 
             return dict(
                 player_on=pygame.Rect(
@@ -41,6 +42,12 @@ class CFGLoaderInterface(CFGLoaderStrategy):
                     player_zone.get('top'),
                     player_zone.get('width'),
                     player_zone.get('height')
+                ),
+                level_zone=pygame.Rect(
+                    level_zone.get('left'),
+                    level_zone.get('top'),
+                    level_zone.get('width'),
+                    level_zone.get('height')
                 ),
 
             )
