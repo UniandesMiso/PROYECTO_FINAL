@@ -1,7 +1,7 @@
 import pygame
 
 from src.ecs.components.tags.c_font_tag import FontType
-from src.ecs.components.c_input_command import CInputCommand
+from src.ecs.components.c_input_command import CInputCommand, CommandPhase
 from src.engine.scenes_strategy.scene_strategy import SceneStrategy
 from src.ecs.systems.s_start_spawn import system_start_positions, system_create_starts
 from src.ecs.systems.s_movement import system_movement
@@ -78,7 +78,8 @@ class MenuScene(SceneStrategy):
 
     def do_action(self, c_input: CInputCommand):
         if c_input.name == "START_GAME":
-            self.switch_scene('')
+            if c_input.phase == CommandPhase.START:
+                self.switch_scene('PLAY')
 
     def do_clean(self):
         pass
